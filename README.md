@@ -1,0 +1,1 @@
+# mcgillschedule.github.io
