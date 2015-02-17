@@ -1,1 +1,1 @@
-# connorwstein.github.io
+# Imports mcgill schedules to google calender. 
