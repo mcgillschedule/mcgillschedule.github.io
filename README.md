@@ -1,1 +1,1 @@
-# mcgillschedule.github.io
+# connorwstein.github.io
