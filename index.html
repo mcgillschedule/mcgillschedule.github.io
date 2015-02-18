@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/app.css">
 
     <script src="js/vendor/modernizr.js"></script>
+    <script src="js/htmlscan.js"></script>
+
   </head>
   <body>
     
@@ -34,7 +36,14 @@
 
     <div class="row">
       <div class="large-12 columns">
-          <input type="file" value="Upload">
+          <input type="file" value="Upload" id="fileInput">
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="large-12 columns">
+        <pre id="fileDisplayArea"></pre>
       </div>
     </div>
  
