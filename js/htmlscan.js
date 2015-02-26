@@ -15,15 +15,16 @@ window.onload = function() {
 				var reader = new FileReader();
 				//reader.onload is an event handler for the load event
 				//load event is triggered every time the reading operation has successfully completed
+				var data;
+				reader.onload = function(e) {
+					fileDisplayArea.innerText = data; //reader.result is the file contents, assign that to the fileDisplay area test
+				}		
+				//parse the html string right here
 				reader.readAsText(file);
 				var htmlString=reader.result;
 				var parser=new DOMParser();
-				var parsedResult=(parser.parseFromString(htmlString, "text/xml")).firstChild  //just display first child for testing
-				reader.onload = function(e) {
-					fileDisplayArea.innerText = parsedResult; //reader.result is the file contents, assign that to the fileDisplay area test
-				}		
-				//parse the html string right here
-				
+				var xmlDOM=parser.parseFromString(htmlString, "text/xml");
+    			data= xmlDOM.getElementsByTagName("title")[0];
 			} 
 			else {
 				fileDisplayArea.innerText = "File not supported!";
