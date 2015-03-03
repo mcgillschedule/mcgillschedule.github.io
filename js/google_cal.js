@@ -9,8 +9,8 @@ gapi.client.calendar.calendars.insert(
 });
 
 //Authenticate
-var clientId = 'YOUR_CLIENT_ID';
-var apiKey = 'YOUR_API_KEY';
+var clientId = '490744367652-8pquv32k0bj5alei6eh50ull50j74uek.apps.googleusercontent.com';
+var apiKey = 'AIzaSyCZ8zC0LT8MDTkpDL41tlC7CB7AhOvH1Zw';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 
 //Insert recurring event
