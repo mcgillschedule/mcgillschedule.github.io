@@ -63,7 +63,7 @@ function handleAuthClick(event) {
 
 function makeApiCall() {
   alert("apicall");
-  gapi.client.load('calender', 'v3', function() {
+  gapi.client.load('calendar', 'v3', function() {
       var request=gapi.client.calendar.calendars.insert({
           "resource" :
           {"summary": "McGill Schedule",
