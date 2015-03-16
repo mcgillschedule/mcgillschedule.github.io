@@ -63,18 +63,14 @@ function handleAuthClick(event) {
 
 function makeApiCall() {
   alert("apicall");
-  gapi.client.load('plus', 'v1', function() {
-    var request = gapi.client.plus.people.get({
-      'userId': 'me'
+  gapi.client.load('calender', 'v3', function() {
+      var request=gapi.client.calendar.calendars.insert({
+          "resource" :
+          {"summary": "McGill Schedule",
+          "description": "Winter 2015",
+          "timezone" : "Canada/Montreal"}
+        });
+      request.execute(function(resp){alert("executed");});
     });
-    request.execute(function(resp) {
-      var heading = document.createElement('h4');
-      var image = document.createElement('img');
-      image.src = resp.image.url;
-      heading.appendChild(image);
-      heading.appendChild(document.createTextNode(resp.displayName));
-      document.getElementById('content').appendChild(heading);
-    });
-  });
 }
 
