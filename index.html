@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css">
-
+    <!--><script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script><-->
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/htmlscan.js"></script>
+    <script src="js/google_cal.js"></script>
+    
+
   </head>
   <body>
     
@@ -40,7 +43,7 @@
     </div>
     <div class="row" id="test">
       <div class="large-12 columns">
-          
+          <button id='authorize-button' onclick='handleAuthClick();'>Login</button>
       </div>
     </div>
     
