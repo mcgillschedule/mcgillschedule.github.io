@@ -80,16 +80,16 @@ var scopes = 'https://www.googleapis.com/auth/calendar';
 // }
 
 function checkAuth() {
-  alert("checkauth");
+  console.log("check auth");
   gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true},
       handleAuthResult);
 }
 
 function handleAuthResult(authResult) {
-  alert("handle auth result");
+  console.log("handle auth result");
   var authorizeButton = document.getElementById('authorize-button');
   if (authResult) {
-    authorizeButton.style.visibility = 'hidden';
+    //authorizeButton.style.visibility = 'hidden';
     makeApiCall();
   } else {
     authorizeButton.style.visibility = '';
@@ -98,7 +98,7 @@ function handleAuthResult(authResult) {
 }
 
 function handleAuthClick(event) {
-  alert("handle auth click");
+  console.log("handle auth click");
   gapi.auth.authorize(
       {client_id: clientId, scope: scopes, immediate: false},
       handleAuthResult);
@@ -106,7 +106,7 @@ function handleAuthClick(event) {
 }
 
 function makeApiCall() {
-  alert("apicall");
+  console.log("make api call");
   gapi.client.load('calendar', 'v3', function() {
       var request=gapi.client.calendar.calendars.insert({
           "resource" :
@@ -114,7 +114,7 @@ function makeApiCall() {
           "description": "Winter 2015",
           "timezone" : "Canada/Montreal"}
         });
-      request.execute(function(resp){alert("executed");});
+      request.execute(function(resp){console.log("executed");});
     });
 }
 
