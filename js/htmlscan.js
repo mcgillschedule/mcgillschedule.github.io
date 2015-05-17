@@ -1,5 +1,7 @@
 var reader=new FileReader();
 var data;
+var mcgill_classes=new Array();
+var test="hey";
 reader.onload=function(){
   data=reader.result;
   var dummy_element=document.createElement('div');
@@ -10,7 +12,7 @@ reader.onload=function(){
   //Class name comes from caption text skipping the scheduled meeting times
   //All other data comes from the dddefault class, however will need to extract the correct data from there
   var data_tables=dummy_element.getElementsByClassName('datadisplaytable');
-  var mcgill_classes=new Array();
+  
   
   for(var i=0;i<data_tables.length;i+=2){
     var mcgill_class=new Object();
@@ -109,14 +111,22 @@ function makeApiCall() {
   console.log("make api call");
   gapi.client.load('calendar', 'v3', createCalendar);
 }
-
 function createCalendar(){
-  var request=gapi.client.calendar.calendars.insert({
-          "resource" :
-          {"summary": "McGill Schedule",
-          "description": "Winter 2015",
-          "timezone" : "Canada/Montreal"}
-        });
+  console.log(test);
+  console.log("Mcgill class 0"+mcgill_classes[0].class_name);
+  var request=gapi.client.calendar.events.insert({
+           "calendarId": "primary",
+           resource:{
+               "summary": "Appointment",
+               "location": "Somewhere",
+               "start": {
+                 "dateTime": "2015-05-16T11:00:00.000-04:00"
+               },
+              "end": {
+                 "dateTime": "2015-05-16T11:25:00.000-04:00"
+               }
+             }
+         });
   request.execute(function(resp){console.log("executed")});
 }
 
