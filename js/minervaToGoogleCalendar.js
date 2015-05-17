@@ -115,7 +115,7 @@ function makeApiCall() {
 function addCalendar(){
  
   console.log("Mcgill class 0"+mcgill_classes[0].class_name);
-  console.log(getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getStartTime(mcgill_classes[0].times)+":00.000-04:00")
+  console.log(getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getStartTime(mcgill_classes[0].times)+":00.000-04:00");
   var request=gapi.client.calendar.events.insert({
          "calendarId": "primary",
          resource:{
@@ -149,15 +149,23 @@ function getLastMonth(dates){
   return dates.slice(-12,-9);
 }
 function getStartTime(times){
+  var strings=times.split(" ");
+  if(strings[1]==="PM"){
+    return String(Number(times[0])+12);
+  }
   return times.split(" ")[0];
 }
 function getEndTime(times){
+  var strings=times.split(" ");
+  if(strings[1]==="PM"){
+    return String(Number(times[3])+12);
+  }
   return times.split(" ")[3];
 }
 function lookupMonth(month){
   switch(month){
     case "Sep":
-      return "05";
+      return "09";
     case "Dec":
       return "12";
     case "Jan":
