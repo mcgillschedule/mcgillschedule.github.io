@@ -125,8 +125,11 @@ function addCalendar(){
                "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getStartTime(mcgill_classes[0].times)+":00.000-04:00"
              },
             "end": {
-               "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getLastMonth(mcgill_classes[0].dates))+"-"+getLastDay(mcgill_classes[0].dates)+"T"+getEndTime(mcgill_classes[0].times)+":00.000-04:00"
+               "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getEndTime(mcgill_classes[0].times)+":00.000-04:00"
              }
+             "recurrence": [
+             "RRULE:FREQ=WEEKLY;UNTIL=20151201T170000Z",
+            ],
            }
        });
   request.execute(function(resp){console.log("Added class "+mcgill_classes[0].class_name)});
@@ -146,7 +149,7 @@ function getFirstMonth(dates){
   return dates.slice(0,3);
 }
 function getLastMonth(dates){
-  return dates.slice(-13,-9);
+  return dates.slice(-12,-9);
 }
 function getStartTime(times){
   return times.split(" ")[0];
