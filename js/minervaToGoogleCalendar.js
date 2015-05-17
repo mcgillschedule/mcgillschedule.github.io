@@ -115,22 +115,22 @@ function makeApiCall() {
 function addCalendar(){
  
   console.log("Mcgill class 0"+mcgill_classes[0].class_name);
-  for (class in mcgill_classes){
-    var request=gapi.client.calendar.events.insert({
-           "calendarId": "primary",
-           resource:{
-               "summary": class.class_name,
-               "location": class.classroom,
-               "start": {
-                 "dateTime": getYear(class.dates)+"-"+lookupMonth(getFirstMonth(class.dates))+getFirstDay(class.dates)+getStartTime(class.times)+":00.000-04:00"
-               },
-              "end": {
-                 "dateTime": getYear(class.dates)+"-"+lookupMonth(getLastMonth(class.dates))+getLastDay(class.dates)+getEndTime(class.times)+":00.000-04:00"
-               }
+  
+  var request=gapi.client.calendar.events.insert({
+         "calendarId": "primary",
+         resource:{
+             "summary": mcgill_classes[0].class_name,
+             "location": mcgill_classes[0].classroom,
+             "start": {
+               "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+getFirstDay(mcgill_classes[0].dates)+getStartTime(mcgill_classes[0].times)+":00.000-04:00"
+             },
+            "end": {
+               "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getLastMonth(mcgill_classes[0].dates))+getLastDay(mcgill_classes[0].dates)+getEndTime(mcgill_classes[0].times)+":00.000-04:00"
              }
-         });
-    request.execute(function(resp){console.log("Added class "+class.class_name)});
-  }
+           }
+       });
+  request.execute(function(resp){console.log("Added class "+mcgill_classes[0].class_name)});
+  
 }
 
 function getYear(dates){
