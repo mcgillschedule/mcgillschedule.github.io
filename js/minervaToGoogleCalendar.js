@@ -1,7 +1,7 @@
 var reader=new FileReader();
 var data;
 var mcgill_classes=new Array();
-var test="hey";
+
 reader.onload=function(){
   data=reader.result;
   var dummy_element=document.createElement('div');
@@ -109,25 +109,64 @@ function handleAuthClick(event) {
 
 function makeApiCall() {
   console.log("make api call");
-  gapi.client.load('calendar', 'v3', createCalendar);
+  gapi.client.load('calendar', 'v3', addCalendar);
 }
-function createCalendar(){
-  console.log(test);
+
+function addCalendar(){
+ 
   console.log("Mcgill class 0"+mcgill_classes[0].class_name);
-  var request=gapi.client.calendar.events.insert({
+  for (class in mcgill_classes){
+    var request=gapi.client.calendar.events.insert({
            "calendarId": "primary",
            resource:{
-               "summary": "Appointment",
-               "location": "Somewhere",
+               "summary": class.class_name,
+               "location": class.classroom,
                "start": {
-                 "dateTime": "2015-05-16T11:00:00.000-04:00"
+                 "dateTime": getYear(class.dates)+"-"+lookupMonth(getFirstMonth(class.dates))+getFirstDay(class.dates)+getStartTime(class.times)+":00.000-04:00"
                },
               "end": {
-                 "dateTime": "2015-05-16T11:25:00.000-04:00"
+                 "dateTime": getYear(class.dates)+"-"+lookupMonth(getLastMonth(class.dates))+getLastDay(class.dates)+getEndTime(class.times)+":00.000-04:00"
                }
              }
          });
-  request.execute(function(resp){console.log("executed")});
+    request.execute(function(resp){console.log("Added class "+class.class_name)});
+  }
+}
+
+function getYear(dates){
+  return dates.substring(dates.length-4,dates.length);
+}
+function getFirstDay(dates){
+  return dates.slice(4,6);
+}
+function getLastDay(dates){
+  return dates.slice(-8,-6);
+}
+function getFirstMonth(dates){
+  return dates.slice(0,3);
+}
+function getLastMonth(dates){
+  return dates.slice(-13,-9);
+}
+function getStartTime(times){
+  return times.split(" ")[0];
+}
+function getEndTime(times){
+  return times.split(" ")[3];
+}
+function lookupMonth(month){
+  switch(month){
+    case "Sep":
+      return 05;
+    case "Dec":
+      return 12;
+    case "Jan":
+      return 01;
+    case "Apr":
+      return 14;
+    default:
+      console.log("Error month does not match");
+  }
 }
 
 
