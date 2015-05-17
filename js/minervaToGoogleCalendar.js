@@ -157,13 +157,13 @@ function getEndTime(times){
 function lookupMonth(month){
   switch(month){
     case "Sep":
-      return 05;
+      return "05";
     case "Dec":
-      return 12;
+      return "12";
     case "Jan":
-      return 01;
+      return "01";
     case "Apr":
-      return 14;
+      return "14";
     default:
       console.log("Error month does not match");
   }
