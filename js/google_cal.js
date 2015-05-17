@@ -1,16 +1,16 @@
 //Create a new calendar
 //1 calendar for all classes or each class has its own calendar?
-// gapi.client.calendar.calendars.insert(
-// {
-//     "resource" :
-//     {"summary": "McGill Schedule",
-//     "description": "Winter 2015",
-//     "timezone" : "Canada/Montreal"}
-// });
+gapi.client.calendar.calendars.insert(
+{
+    "resource" :
+    {"summary": "McGill Schedule",
+    "description": "Winter 2015",
+    "timezone" : "Canada/Montreal"}
+});
 
 //Authenticate
-var clientId = '490744367652-8pquv32k0bj5alei6eh50ull50j74uek.apps.googleusercontent.com';
-var apiKey = 'AIzaSyCZ8zC0LT8MDTkpDL41tlC7CB7AhOvH1Zw';
+var clientId = '613471085204-fvk3a7kfu7morl2gp97vspoj21r4b2fv.apps.googleusercontent.com';
+//var apiKey = 'AIzaSyCZ8zC0LT8MDTkpDL41tlC7CB7AhOvH1Zw';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 
 //Insert recurring event
@@ -29,11 +29,11 @@ var scopes = 'https://www.googleapis.com/auth/calendar';
 // };
 
 //Check if user is logged in
-function handleClientLoad() {
-  alert("handle client load");
-  gapi.client.setApiKey(apiKey);
-  window.setTimeout(checkAuth,1);
-}
+// function handleClientLoad() {
+//   alert("handle client load");
+//   gapi.client.setApiKey(apiKey);
+//   window.setTimeout(checkAuth,1);
+// }
 
 function checkAuth() {
   alert("checkauth");
