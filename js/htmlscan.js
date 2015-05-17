@@ -107,15 +107,17 @@ function handleAuthClick(event) {
 
 function makeApiCall() {
   console.log("make api call");
-  gapi.client.load('calendar', 'v3', function() {
-      var request=gapi.client.calendar.calendars.insert({
+  gapi.client.load('calendar', 'v3', createCalendar);
+}
+
+function createCalendar(){
+  var request=gapi.client.calendar.calendars.insert({
           "resource" :
           {"summary": "McGill Schedule",
           "description": "Winter 2015",
           "timezone" : "Canada/Montreal"}
         });
-      request.execute(function(resp){console.log("executed");});
-    });
+  request.execute(function(resp){console.log("executed")});
 }
 
 
