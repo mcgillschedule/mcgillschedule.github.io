@@ -126,10 +126,7 @@ function addCalendar(){
              },
             "end": {
                "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getEndTime(mcgill_classes[0].times)+":00.000-04:00"
-             },
-             "recurrence": [
-             "RRULE:FREQ=WEEKLY;UNTIL=20151201T170000Z",
-            ],
+             }
            }
        });
   request.execute(function(resp){console.log("Added class "+mcgill_classes[0].class_name)});
