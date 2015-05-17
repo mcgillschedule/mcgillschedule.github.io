@@ -115,18 +115,23 @@ function makeApiCall() {
 function addCalendar(){
   var dashSplit=mcgill_classes[0].times.split("-");
   console.log("Mcgill class 0"+mcgill_classes[0].class_name);
+  console.log("test");
   console.log(getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getTime(dashSplit[0])+":00.000-04:00");
+  console.log(convertDays(mcgill_classes[0].days));
   var request=gapi.client.calendar.events.insert({
          "calendarId": "primary",
          resource:{
              "summary": mcgill_classes[0].class_name,
              "location": mcgill_classes[0].classroom,
              "start": {
-               "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getTime(dashSplit[0])+":00.000-04:00"
+               "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getTime(dashSplit[0])+":00.000",
+               "timeZone":"America/Montreal" 
              },
             "end": {
-               "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getTime(dashSplit[1])+":00.000-04:00"
-             }
+               "dateTime": getYear(mcgill_classes[0].dates)+"-"+lookupMonth(getFirstMonth(mcgill_classes[0].dates))+"-"+getFirstDay(mcgill_classes[0].dates)+"T"+getTime(dashSplit[1])+":00.000",
+                "timeZone":"America/Montreal"
+             },
+             "recurrence": ["RRULE:FREQ=WEEKLY;BYDAY="+convertDays(mcgill_classes[0].days)+";UNTIL=20151201T000000Z"]
            }
        });
   request.execute(function(resp){console.log("Added class "+mcgill_classes[0].class_name)});
@@ -151,13 +156,36 @@ function getLastMonth(dates){
 function getTime(times){
   var spaceSplit=times.split(" ");
   var colonSplit=times.split(":");
-  if(s.search("PM")!=-1){
+  if(times.search("PM")!=-1){
       return String(Number(colonSplit[0])+12)+":"+colonSplit[1].substring(0,2);
   }
   return spaceSplit[0];
 
 }
-
+function convertDays(days){
+  var chars=days.split("");
+  var result="";
+  for(c in chars){
+    switch(c){
+      case "M":
+        result+="MO,";
+        break;
+      case "T":
+        result+="TU,";
+        break;
+      case "W":
+        result+="WE,";
+        break;
+      case "R":
+        result+="TH,";
+        break;
+      case "F":
+        result+="FR,";
+        break;
+    }
+  }
+  return result.substring(0,result.length);
+}
 function lookupMonth(month){
   switch(month){
     case "Sep":
