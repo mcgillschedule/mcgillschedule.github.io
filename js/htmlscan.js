@@ -44,13 +44,13 @@ window.onload=function(){
 }  
 //Create a new calendar
 //1 calendar for all classes or each class has its own calendar?
-gapi.client.calendar.calendars.insert(
-{
-    "resource" :
-    {"summary": "McGill Schedule",
-    "description": "Winter 2015",
-    "timezone" : "Canada/Montreal"}
-});
+// gapi.client.calendar.calendars.insert(
+// {
+//     "resource" :
+//     {"summary": "McGill Schedule",
+//     "description": "Winter 2015",
+//     "timezone" : "Canada/Montreal"}
+// });
 
 //Authenticate
 var clientId = '613471085204-fvk3a7kfu7morl2gp97vspoj21r4b2fv.apps.googleusercontent.com';
