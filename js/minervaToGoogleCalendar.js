@@ -13,7 +13,7 @@ reader.onload=function(){
   //All other data comes from the dddefault class, however will need to extract the correct data from there
   var data_tables=dummy_element.getElementsByClassName('datadisplaytable');
   
-  
+  console.log("TERM: "+data_tables[0].tBodies[0].rows[0].cells[0].textContent);
   for(var i=0;i<data_tables.length;i+=2){
     var mcgill_class=new Object();
     mcgill_class.class_name=data_tables[i].caption.textContent; 
@@ -30,11 +30,11 @@ reader.onload=function(){
     }
   
   }
-  for(var k=0;k<mcgill_classes.length;k++){
-    for(var key in mcgill_classes[k]){
-      console.log(mcgill_classes[k][key]);
-    }
-  }
+  // for(var k=0;k<mcgill_classes.length;k++){
+  //   for(var key in mcgill_classes[k]){
+  //     console.log(mcgill_classes[k][key]);
+  //   }
+  // }
   
 }
 window.onload=function(){
@@ -59,27 +59,6 @@ var clientId = '613471085204-fvk3a7kfu7morl2gp97vspoj21r4b2fv.apps.googleusercon
 //var apiKey = 'AIzaSyCZ8zC0LT8MDTkpDL41tlC7CB7AhOvH1Zw';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 
-//Insert recurring event
-// var resource = {
-//   "summary": "Appointment",
-//   "location": "Somewhere",
-//   "start": {
-//     "dateTime": "2011-12-16T10:00:00.000-07:00"//This is ISO 8601 Date time format
-//   },
-//   "end": {
-//     "dateTime": "2011-12-16T10:25:00.000-07:00"
-//   },
-// "recurrence": [
-//     "RRULE:FREQ=WEEKLY;UNTIL=20110701T170000Z",
-//   ],
-// };
-
-//Check if user is logged in
-// function handleClientLoad() {
-//   alert("handle client load");
-//   gapi.client.setApiKey(apiKey);
-//   window.setTimeout(checkAuth,1);
-// }
 
 function checkAuth() {
   console.log("check auth");
@@ -109,9 +88,24 @@ function handleAuthClick(event) {
 
 function makeApiCall() {
   console.log("make api call");
-  gapi.client.load('calendar', 'v3', addCalendar);
+  gapi.client.load('calendar', 'v3', add);
 }
-function addCalendar(){
+function add(){
+  addCalendar();
+}
+var addCalendar=function(){
+  var req=gapi.client.calendar.calendars.insert(
+  {
+      "resource" :
+      {"summary": "McGill Schedule",
+      "description": "Winter 2015",
+      "timezone" : "Canada/Montreal"}
+  });
+  req.execute(function(resp){
+    console.log("added calendar");
+  })
+}
+var addClasses=function (){
   for(var i=0;i<mcgill_classes.length;i++){
     if(mcgill_classes[i].times==="TBA"){
       continue;
@@ -186,7 +180,7 @@ function convertDays(days){
       case "T":
         result+="TU,";
         break;
-      case "W":
+      case "W":-
         result+="WE,";
         break;
       case "R":
@@ -208,7 +202,7 @@ function lookupMonth(month){
     case "Jan":
       return "01";
     case "Apr":
-      return "14";
+      return "04";
     default:
       console.log("Error month does not match");
   }
