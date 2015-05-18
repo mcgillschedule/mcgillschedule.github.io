@@ -91,9 +91,11 @@ function makeApiCall() {
   gapi.client.load('calendar', 'v3', add);
 }
 function add(){
-  addCalendar();
+  addCalendar().done(getCalendarID);
+  
 }
 var addCalendar=function(){
+  var r=$.Deferred();
   var req=gapi.client.calendar.calendars.insert(
   {
       "resource" :
@@ -103,10 +105,27 @@ var addCalendar=function(){
   });
   req.execute(function(resp){
     console.log("added calendar");
-  })
+  });
+  setTimeout(function () {
+    // and call `resolve` on the deferred object, once you're done
+    r.resolve();
+  }, 2500);
+  return r;
 }
-var addClasses=function (){
-  for(var i=0;i<mcgill_classes.length;i++){
+var getCalendarID=function(){
+  var req=gapi.client.calendar.calendarList.list({});
+  req.execute(function(resp){
+    for(var i=0;i<resp.items.length;i++){
+      if(resp.items[i].summary==="McGill Schedule"){
+        console.log("Mcgill Sched id: "+ resp.items[i].id);
+        calendarID=resp.items[i].id;
+        break;
+      }
+    }
+  });
+}
+var addClasses=function(){
+  for(var i=0;i<1;i++){
     if(mcgill_classes[i].times==="TBA"){
       continue;
     }
