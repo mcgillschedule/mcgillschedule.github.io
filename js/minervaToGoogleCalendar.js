@@ -180,7 +180,7 @@ function convertDays(days){
       case "T":
         result+="TU,";
         break;
-      case "W":-
+      case "W":
         result+="WE,";
         break;
       case "R":
