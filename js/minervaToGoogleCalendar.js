@@ -86,29 +86,25 @@ function handleAuthClick(event) {
   return false;
 }
 
-// function testDeferred(){
-//   console.log("hey");
-//   var d=$.Deferred();
-//   d.done(one).done(two);
-//   d.resolve();
-// }
+function testCallback(){
+  one(two);
+}
 
-// function one(){
-//   setTimeout(function(){alert("delay 1")},3000);
-// }
-// function two(){
-//   setTimeout(function(){alert("delay 2")},3000);
-// }
+function one(callback){
+  setTimeout(function(){alert("delay 1")},2000);
+  callback();
+}
+function two(){
+  setTimeout(function(){alert("delay 2")},1000);
+}
 function makeApiCall() {
   console.log("make api call");
   gapi.client.load('calendar', 'v3', add);
 }
 function add(){
-  var d=$.Deferred();
-  d.done(addCalendar).done(getCalendarID);
-  d.resolve();
+  addCalendar(getCalendarID)
 }
-function addCalendar(){
+function addCalendar(callback){
   var req=gapi.client.calendar.calendars.insert(
   {
       "resource" :
@@ -118,6 +114,7 @@ function addCalendar(){
   });
   req.execute(function(resp){
     console.log("added calendar");
+    callback();
   });
 }
 function getCalendarID(){
