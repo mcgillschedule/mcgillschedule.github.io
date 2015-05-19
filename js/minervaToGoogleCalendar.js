@@ -1,7 +1,7 @@
 var reader = new FileReader();
 var data;
 var mcgill_classes = new Array();
-
+var calendarID;
 reader.onload = function() {
     data = reader.result;
     var dummy_element = document.createElement('div');
@@ -106,7 +106,7 @@ function makeApiCall() {
     gapi.client.load('calendar', 'v3', add);
 }
 function add() {
-    addCalendar(getCalendarID);
+    addCalendar(getCalendarID(addClasses));
 }
 function addCalendar(callback) {
     var req = gapi.client.calendar.calendars.insert(
@@ -121,14 +121,14 @@ function addCalendar(callback) {
         callback();
     });
 }
-function getCalendarID() {
+function getCalendarID(callback) {
     var req = gapi.client.calendar.calendarList.list({});
     req.execute(function(resp) {
         for (var i = 0; i < resp.items.length; i++) {
             if (resp.items[i].summary === "McGill Schedule") {
-                console.log("Mcgill Sched id: " + resp.items[i].id);
-                calendarID = resp.items[i].id;
-                //callback();
+                console.log("Mcgill Sched id: " + ""+resp.items[i].id);
+                calendarID = ""+resp.items[i].id;
+                callback();
                 break;
             }
         }
@@ -150,7 +150,7 @@ function addClasses() {
             console.log("Days: " + convertDays(mcgill_classes[i].days));
             console.log("End Recurrence: " + getYear(mcgill_classes[i].dates) + lookupMonth(getLastMonth(mcgill_classes[i].dates)) + getLastDay(mcgill_classes[i].dates));
             var request = gapi.client.calendar.events.insert({
-                "calendarId": "primary",
+                "calendarId": calendarID,
                 resource: {
                     "summary": mcgill_classes[i].class_name + " " + mcgill_classes[i].format,
                     "location": mcgill_classes[i].classroom,
