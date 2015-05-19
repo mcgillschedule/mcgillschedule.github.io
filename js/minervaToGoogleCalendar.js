@@ -106,7 +106,7 @@ function makeApiCall() {
     gapi.client.load('calendar', 'v3', add);
 }
 function add() {
-    addCalendar(getCalendarID(addClasses));
+    addCalendar(getCalendarID);
 }
 function addCalendar(callback) {
     var req = gapi.client.calendar.calendars.insert(
@@ -121,14 +121,14 @@ function addCalendar(callback) {
         callback();
     });
 }
-function getCalendarID(callback) {
+function getCalendarID() {
     var req = gapi.client.calendar.calendarList.list({});
     req.execute(function(resp) {
         for (var i = 0; i < resp.items.length; i++) {
             if (resp.items[i].summary === "McGill Schedule") {
                 console.log("Mcgill Sched id: " + resp.items[i].id);
                 calendarID = resp.items[i].id;
-                callback();
+                //callback();
                 break;
             }
         }
