@@ -94,33 +94,41 @@ li {
 @keyframes fadein {
     from {
         opacity:0;
+        -webkit-transform: translateY(-20px);
     }
     to {
         opacity:1;
+        -webkit-transform: translateY(0);
     }
 }
 @-moz-keyframes fadein { /* Firefox */
     from {
         opacity:0;
+        -webkit-transform: translateY(-20px);
     }
     to {
         opacity:1;
+        -webkit-transform: translateY(0);
     }
 }
 @-webkit-keyframes fadein { /* Safari and Chrome */
     from {
         opacity:0;
+        -webkit-transform: translateY(-20px);
     }
     to {
         opacity:1;
+        -webkit-transform: translateY(0);
     }
 }
 @-o-keyframes fadein { /* Opera */
     from {
         opacity:0;
+        -webkit-transform: translateY(-20px);
     }
     to {
         opacity: 1;
+        -webkit-transform: translateY(0);
     }
 }
 
