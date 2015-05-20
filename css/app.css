@@ -59,10 +59,9 @@ li {
 }
 
 .dump {
-	background-color:#8CC63F;
+	background-color:#E47272;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
 	font-size:19px;
 	padding:19px 59px;
 	text-decoration:none;
@@ -74,7 +73,7 @@ li {
 
 }
 .dump:hover {
-	background-color:#679E37;
+	background-color:#C52727;
 }
 .dump:focus {
 	position:relative;
