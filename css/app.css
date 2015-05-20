@@ -75,8 +75,10 @@ li {
 .dump:hover {
 	background-color:#5cbf2a;
 }
-.dump:active {
+.dump:focus {
 	position:relative;
+	background-color:#8CC63F;
+
 	top:1px;
 }
 
