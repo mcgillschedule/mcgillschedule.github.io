@@ -33,6 +33,7 @@ body {
   padding-right: 2cm;
   padding-left: 2cm;
   padding-top: 1cm;
+  padding-bottom: 1cm;
 }
 
 hr {
@@ -73,11 +74,11 @@ li {
 
 }
 .dump:hover {
-	background-color:#5cbf2a;
+	background-color:#679E37;
 }
 .dump:focus {
 	position:relative;
-	background-color:#8CC63F;
+	background-color:#679E37;
 
 	top:1px;
 }
