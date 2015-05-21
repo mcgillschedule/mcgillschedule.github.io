@@ -137,7 +137,7 @@ function getCalendarID(callback) {
     });
 }
 function addClasses() {
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < mcgill_classes.length; i++) {
         if (mcgill_classes[i].times === "TBA") {
             continue;
         } 
