@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Import McGill Schedule</title>
 
-
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css">
@@ -17,41 +16,26 @@
 
   </head>
   <body>
-    
-    <div class="row">
-      <div class="large-12 columns">
-        <h1>McGill Schedule --> Google Calender</h1>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="large-12 columns">
-        <p>Click <a href="https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin" target="_blank">here</a> to login to minerva</p>
-        
-      </div>
-    </div>
-    <div class="row">
-      <div class="large-12 columns">
-        <p>Navigate to "Student Schedule by Course Section"</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="large-12 columns">
-        <p>File > Save Page As... then upload below</p>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="large-12 columns">
-          <input type="file" value="Upload" id="fileInput">
-      </div>
-    </div>
-    <div class="row" id="test">
-      <div class="large-12 columns">
-          <button id='authorize-button' onclick='testCallback()'>Dump to google calendar</button>
-      </div>
+    <div class="panel">
+    <object data="img/top_graphic.svg"></object>
+    <br>
+    <hr>
+    <p>Now you can display your McGill weekly class schedule in your Google Calendar!</p>
+    <ol>
+            <li>Click <a href="https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin" target="_blank">here</a> to login to minerva</li>
+            <li>Navigate to Student Menu > Registration Menu > View Student Schedule by Course Section</li>
+            <li>Select term</li>
+            <li>File > Save Page As (Format Webpage, HTML only) and upload below.</li>
+    </ol>
+
+      <input type="file" value="Upload" class="fileInput">
+
     </div>
     
+  <div class="center-button">
+   <button class='dump' onclick='handleAuthClick()'>Add to Google Calendar</button>
+ </div>
     
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
