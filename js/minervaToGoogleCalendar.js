@@ -38,7 +38,7 @@ reader.onload = function() {
 
 }
 window.onload = function() {
-    var fileInput = document.getElementById("fileInput");
+    var fileInput = document.getElementById("htmlUpload");
     fileInput.onchange = function handle(e) {
         var file = fileInput.files[0];
         reader.readAsText(file);
@@ -106,7 +106,9 @@ function makeApiCall() {
     gapi.client.load('calendar', 'v3', add);
 }
 function add() {
-    addCalendar(getCalendarID(addClasses));
+    addCalendar(function(){
+        getCalendarID(addClasses);
+    });
 }
 function addCalendar(callback) {
     var req = gapi.client.calendar.calendars.insert(
@@ -135,7 +137,7 @@ function getCalendarID(callback) {
     });
 }
 function addClasses() {
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < mcgill_classes.length; i++) {
         if (mcgill_classes[i].times === "TBA") {
             continue;
         } 
