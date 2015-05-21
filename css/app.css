@@ -32,7 +32,7 @@ body {
   max-width: 16cm;
   padding-right: 2cm;
   padding-left: 2cm;
-  padding-top: 1cm;
+  padding-top: .7cm;
   padding-bottom: 1cm;
   animation: fadein 1.5s;
 -moz-animation: fadein 1.5s; /* Firefox */
@@ -74,6 +74,7 @@ li {
 	width: 80%;
 	max-width: 16cm;
 	height: 2cm;
+	border-bottom: solid #C52727;
   animation: fadein 1.5s;
 -moz-animation: fadein 1.5s; /* Firefox */
 -webkit-animation: fadein 1.5s; /* Safari and Chrome */
@@ -82,11 +83,14 @@ li {
 }
 .dump:hover {
 	background-color:#C52727;
+	border-bottom: #B61B1B;
+
 }
 .dump:focus {
 	position:relative;
 	background-color:#C52727;
 	top:1px;
+	border-bottom: #D22E2E;
 }
 
 @keyframes fadein {
