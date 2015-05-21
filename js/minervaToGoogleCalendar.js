@@ -38,7 +38,7 @@ reader.onload = function() {
 
 }
 window.onload = function() {
-    var fileInput = document.getElementById("fileInput");
+    var fileInput = document.getElementById("htmlUpload");
     fileInput.onchange = function handle(e) {
         var file = fileInput.files[0];
         reader.readAsText(file);
