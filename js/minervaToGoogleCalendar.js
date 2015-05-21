@@ -172,8 +172,6 @@ function addClasses() {
             });
         }
     }
-    //Redirect to calendar
-    window.location.href = "http://google.com/calendar";
 }
 
 function getYear(dates) {
