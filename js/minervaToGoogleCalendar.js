@@ -106,7 +106,9 @@ function makeApiCall() {
     gapi.client.load('calendar', 'v3', add);
 }
 function add() {
-    addCalendar(getCalendarID(addClasses));
+    addCalendar(function(){
+        getCalendarID(addClasses);
+    });
 }
 function addCalendar(callback) {
     var req = gapi.client.calendar.calendars.insert(
