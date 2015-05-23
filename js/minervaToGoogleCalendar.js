@@ -2,6 +2,7 @@ var reader = new FileReader();
 var data;
 var mcgill_classes = new Array(); 
 var calendarID;
+var term;
 
 reader.onload = function() {
     data = reader.result;
@@ -9,7 +10,9 @@ reader.onload = function() {
     dummy_element.innerHTML = data;
     var data_tables = dummy_element.getElementsByClassName('datadisplaytable');
 
-    console.log("TERM: " + data_tables[0].tBodies[0].rows[0].cells[0].textContent);
+    console.log("TERM: " + data_tables[0].tBodies[0].rows[0].cells[1].textContent);
+    term=data_tables[0].tBodies[0].rows[0].cells[1].textContent;
+
     for (var i = 0; i < data_tables.length; i += 2) {
         var mcgill_class = new Object();
         mcgill_class.class_name = data_tables[i].caption.textContent;
@@ -83,12 +86,13 @@ function add() {
         getCalendarID(addClasses);
     });
 }
+
 function addCalendar(callback) {
     var req = gapi.client.calendar.calendars.insert(
     {
         "resource": 
         {"summary": "McGill Schedule",
-            "description": "Winter 2015",
+            "description": term,
             "timezone": "Canada/Montreal"}
     });
     req.execute(function(resp) {
@@ -96,6 +100,7 @@ function addCalendar(callback) {
         callback();
     });
 }
+
 function getCalendarID(callback) {
     var req = gapi.client.calendar.calendarList.list({});
     req.execute(function(resp) {
@@ -109,13 +114,18 @@ function getCalendarID(callback) {
         }
     });
 }
+
 function addClasses() {
+    
     for (var i = 0; i < mcgill_classes.length; i++) {
         if (mcgill_classes[i].times === "TBA") {
+            //Skip TBA classes i.e. unscheduled classes
             continue;
         } 
         else {
+            //"3:35 PM - 5:25 PM" --> ["3:35 PM ", " 5:25 PM"]
             var dashSplit = mcgill_classes[i].times.split("-");
+
             console.log("Class Name: " + mcgill_classes[i].class_name);
             console.log("Times: " + mcgill_classes[i].times);
             console.log(getTime(dashSplit[0]));
@@ -148,22 +158,32 @@ function addClasses() {
 }
 
 function getYear(dates) {
+    //ex: "Sep 04, 2015 - Dec 07, 2015" --> 2015
     return dates.substring(dates.length - 4, dates.length);
 }
+
 function getFirstDay(dates) {
+    //ex: "Sep 04, 2015 - Dec 07, 2015" --> 04
     return dates.slice(4, 6);
 }
+
 function getLastDay(dates) {
+    //ex: "Sep 04, 2015 - Dec 07, 2015" --> 07
     return dates.slice(-8, -6);
 }
+
 function getFirstMonth(dates) {
+    //ex: "Sep 04, 2015 - Dec 07, 2015" --> "Sep"
     return dates.slice(0, 3);
 }
+
 function getLastMonth(dates) {
+    //ex: "Sep 04, 2015 - Dec 07, 2015" --> "Dec"
     return dates.slice(-12, -9);
 }
+
 function getTime(times) {
-    
+    //ex: "3:35 PM" --> "15:35"
     var spaceSplit = times.split(" ");
     var colonSplit = times.split(":");
     if ((times.search("PM") != -1) && (Number(colonSplit[0]) < 12)) {
@@ -172,11 +192,12 @@ function getTime(times) {
     return spaceSplit[0];
 
 }
+
 function convertDays(days) {
+    //ex: "MTW" --> "MO, TU, WE" (required format for google calendar api)
     var chars = days.split("");
     var result = "";
     for (c in chars) {
-        
         switch (chars[c]) {
             case "M":
                 result += "MO,";
@@ -197,6 +218,7 @@ function convertDays(days) {
     }
     return result.substring(0, result.length);
 }
+
 function lookupMonth(month) {
     switch (month) {
         case "Sep":
