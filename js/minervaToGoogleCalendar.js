@@ -120,12 +120,19 @@ function addClasses() {
     //determine day of week
     //if class does not occur on that day of the week, delete it from the first day
     var weekdays=["SU","M","T","W","R","F","SA"];
+    var firstday;
+    var classStartDelay=0;
     for (var i = 0; i < mcgill_classes.length; i++) {
         var d=new Date(getYear(mcgill_classes[i].dates),lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1,getFirstDay(mcgill_classes[i].dates));
-        console.log(getYear(mcgill_classes[i].dates)+lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1+getFirstDay(mcgill_classes[i].dates))
+        console.log(getYear(mcgill_classes[i].dates)+lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1+getFirstDay(mcgill_classes[i].dates));
         console.log("Day of start: "+weekdays[d.getDay()]);
         if(mcgill_classes[i].days.indexOf(weekdays[d.getDay()])===-1){
             console.log("Dont start on first day");
+            firstday=mcgill_classes[i].days.charAt(0);
+            var firstDayIndex=weekdays.indexOf(firstday);
+            var classStartIndex=weekdays.indexOf(d.getDay());
+            classStartDelay=7-classStartIndex+firstDayIndex;
+            console.log("Class start delay: "+classStartDelay);
         }
         if (mcgill_classes[i].times === "TBA") {
             //Skip TBA classes i.e. unscheduled classes
@@ -139,8 +146,8 @@ function addClasses() {
             console.log("Times: " + mcgill_classes[i].times);
             console.log(getTime(dashSplit[0]));
             console.log(getTime(dashSplit[1].substring(1, dashSplit[1].length + 1)));
-            console.log("Start Time: " + getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + getFirstDay(mcgill_classes[i].dates) + "T" + getTime(dashSplit[0]) + ":00.000");
-            console.log("End Time: " + getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + getFirstDay(mcgill_classes[i].dates) + "T" + getTime(dashSplit[1]) + ":00.000");
+            console.log("Start Time: " + getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + String(Number(getFirstDay(mcgill_classes[i].dates))+classStartDelay) + "T" + getTime(dashSplit[0]) + ":00.000");
+            console.log("End Time: " + getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + String(Number(getFirstDay(mcgill_classes[i].dates))+classStartDelay) + "T" + getTime(dashSplit[1]) + ":00.000");
             console.log("Days: " + convertDays(mcgill_classes[i].days));
             console.log("End Recurrence: " + getYear(mcgill_classes[i].dates) + lookupMonth(getLastMonth(mcgill_classes[i].dates)) + getLastDay(mcgill_classes[i].dates));
             var request = gapi.client.calendar.events.insert({
