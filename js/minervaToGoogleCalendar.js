@@ -130,7 +130,7 @@ function addClasses() {
             console.log("Dont start on first day");
             firstday=mcgill_classes[i].days.charAt(0);
             var firstDayIndex=weekdays.indexOf(firstday);
-            var classStartIndex=weekdays.indexOf(d.getDay());
+            var classStartIndex=d.getDay();
             classStartDelay=7-classStartIndex+firstDayIndex;
             console.log("Class start delay: "+classStartDelay);
         }
@@ -157,11 +157,11 @@ function addClasses() {
                     "location": mcgill_classes[i].classroom,
                     "start": {
 
-                        "dateTime": getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + getFirstDay(mcgill_classes[i].dates) + "T" + getTime(dashSplit[0]) + ":00.000",
+                        "dateTime": getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + String(Number(getFirstDay(mcgill_classes[i].dates))+classStartDelay) + "T" + getTime(dashSplit[0]) + ":00.000",
                         "timeZone": "America/Montreal"
                     },
                     "end": {
-                        "dateTime": getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + getFirstDay(mcgill_classes[i].dates) + "T" + getTime(dashSplit[1].substring(1, dashSplit[1].length + 1)) + ":00.000",
+                        "dateTime": getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + String(Number(getFirstDay(mcgill_classes[i].dates))+classStartDelay) + "T" + getTime(dashSplit[1].substring(1, dashSplit[1].length + 1)) + ":00.000",
                         "timeZone": "America/Montreal"
                     },
                     // ex: UNTIL="19960404T010000Z"
