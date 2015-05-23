@@ -62,6 +62,7 @@ function handleAuthResult(authResult) {
     if (authResult) {
         //authorizeButton.style.visibility = 'hidden';
         makeApiCall();
+        alert("Schedule has been added successfully!");
     } else {
         authorizeButton.style.visibility = '';
         authorizeButton.onclick = handleAuthClick;
