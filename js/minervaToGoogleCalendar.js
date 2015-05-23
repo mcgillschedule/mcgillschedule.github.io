@@ -124,7 +124,7 @@ function addClasses() {
         var d=new Date(getYear(mcgill_classes[i].dates),lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1,getFirstDay(mcgill_classes[i].dates));
         console.log(getYear(mcgill_classes[i].dates)+lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1+getFirstDay(mcgill_classes[i].dates))
         console.log("Day of start: "+weekdays[d.getDay()]);
-        if(mcgill_classes[i].days.indexOf(weekdays[d.getDay()]!=-1)){
+        if(mcgill_classes[i].days.indexOf(weekdays[d.getDay()])===-1){
             console.log("Dont start on first day");
         }
         if (mcgill_classes[i].times === "TBA") {
