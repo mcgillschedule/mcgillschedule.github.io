@@ -116,13 +116,12 @@ function getCalendarID(callback) {
 }
 
 function addClasses() {
-    //get start day of term 
-    //determine day of week
-    //if class does not occur on that day of the week, delete it from the first day
+    
     var weekdays=["SU","M","T","W","R","F","SA"];
     var firstday;
-    var classStartDelay=0;
+  
     for (var i = 0; i < mcgill_classes.length; i++) {
+        var classStartDelay=0;
         var d=new Date(getYear(mcgill_classes[i].dates),lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1,getFirstDay(mcgill_classes[i].dates));
         console.log(getYear(mcgill_classes[i].dates)+lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1+getFirstDay(mcgill_classes[i].dates));
         console.log("Day of start: "+weekdays[d.getDay()]);
