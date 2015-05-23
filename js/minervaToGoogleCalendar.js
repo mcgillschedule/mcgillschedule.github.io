@@ -116,8 +116,17 @@ function getCalendarID(callback) {
 }
 
 function addClasses() {
-    
+    //get start day of term 
+    //determine day of week
+    //if class does not occur on that day of the week, delete it from the first day
+    var weekdays=["SU","M","T","W","R","F","SA"];
     for (var i = 0; i < mcgill_classes.length; i++) {
+        var d=new Date(getYear(mcgill_classes[i].dates),lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1,getFirstDay(mcgill_classes[i].dates));
+        console.log(getYear(mcgill_classes[i].dates)+lookupMonth(getFirstMonth(mcgill_classes[i].dates))-1+getFirstDay(mcgill_classes[i].dates))
+        console.log("Day of start: "+weekdays[d.getDay()]);
+        if(mcgill_classes[i].days.indexOf(weekdays[d.getDay()]!=-1){
+            console.log("Dont start on first day");
+        }
         if (mcgill_classes[i].times === "TBA") {
             //Skip TBA classes i.e. unscheduled classes
             continue;
@@ -140,6 +149,7 @@ function addClasses() {
                     "summary": mcgill_classes[i].class_name + " " + mcgill_classes[i].format,
                     "location": mcgill_classes[i].classroom,
                     "start": {
+
                         "dateTime": getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + getFirstDay(mcgill_classes[i].dates) + "T" + getTime(dashSplit[0]) + ":00.000",
                         "timeZone": "America/Montreal"
                     },
@@ -147,6 +157,7 @@ function addClasses() {
                         "dateTime": getYear(mcgill_classes[i].dates) + "-" + lookupMonth(getFirstMonth(mcgill_classes[i].dates)) + "-" + getFirstDay(mcgill_classes[i].dates) + "T" + getTime(dashSplit[1].substring(1, dashSplit[1].length + 1)) + ":00.000",
                         "timeZone": "America/Montreal"
                     },
+                    // ex: UNTIL="19960404T010000Z"
                     "recurrence": ["RRULE:FREQ=WEEKLY;BYDAY=" + convertDays(mcgill_classes[i].days) + ";UNTIL=" + getYear(mcgill_classes[i].dates) + lookupMonth(getLastMonth(mcgill_classes[i].dates)) + getLastDay(mcgill_classes[i].dates) + "T220000Z"]
                 }
             });
