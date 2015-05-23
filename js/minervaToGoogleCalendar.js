@@ -1,18 +1,14 @@
 var reader = new FileReader();
 var data;
-var mcgill_classes = new Array();
+var mcgill_classes = new Array(); 
 var calendarID;
+
 reader.onload = function() {
     data = reader.result;
     var dummy_element = document.createElement('div');
     dummy_element.innerHTML = data;
-    //Now have div element with all data inside of it
-    //convert data to ist of "Class objects"
-    //Class objects should contain Class name, type (lecture, tutorial etc.), times, date range, location
-    //Class name comes from caption text skipping the scheduled meeting times
-    //All other data comes from the dddefault class, however will need to extract the correct data from there
     var data_tables = dummy_element.getElementsByClassName('datadisplaytable');
-    
+
     console.log("TERM: " + data_tables[0].tBodies[0].rows[0].cells[0].textContent);
     for (var i = 0; i < data_tables.length; i += 2) {
         var mcgill_class = new Object();
@@ -30,11 +26,11 @@ reader.onload = function() {
         }
     
     }
-// for(var k=0;k<mcgill_classes.length;k++){
-//   for(var key in mcgill_classes[k]){
-//     console.log(mcgill_classes[k][key]);
-//   }
-// }
+    for(var k=0;k<mcgill_classes.length;k++){
+      for(var key in mcgill_classes[k]){
+        console.log(mcgill_classes[k][key]);
+      }
+    }
 
 }
 window.onload = function() {
@@ -44,15 +40,6 @@ window.onload = function() {
         reader.readAsText(file);
     };
 }
-//Create a new calendar
-//1 calendar for all classes or each class has its own calendar?
-// gapi.client.calendar.calendars.insert(
-// {
-//     "resource" :
-//     {"summary": "McGill Schedule",
-//     "description": "Winter 2015",
-//     "timezone" : "Canada/Montreal"}
-// });
 
 //Authenticate
 var clientId = '613471085204-fvk3a7kfu7morl2gp97vspoj21r4b2fv.apps.googleusercontent.com';
@@ -86,25 +73,11 @@ function handleAuthClick(event) {
     return false;
 }
 
-function testCallback() {
-    one(two);
-}
-
-function one(callback) {
-    setTimeout(function() {
-        alert("delay 1")
-    }, 2000);
-    callback();
-}
-function two() {
-    setTimeout(function() {
-        alert("delay 2")
-    }, 1000);
-}
 function makeApiCall() {
     console.log("make api call");
     gapi.client.load('calendar', 'v3', add);
 }
+
 function add() {
     addCalendar(function(){
         getCalendarID(addClasses);
