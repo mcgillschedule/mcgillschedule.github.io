@@ -75,6 +75,7 @@ li {
 	max-width: 16cm;
 	height: 2cm;
 	border-bottom: solid #C52727;
+	transition: none;
   animation: fadein 1.5s;
 -moz-animation: fadein 1.5s; /* Firefox */
 -webkit-animation: fadein 1.5s; /* Safari and Chrome */
