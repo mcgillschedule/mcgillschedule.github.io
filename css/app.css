@@ -15,6 +15,12 @@ body {
 	background-color: #F4F4F4;
 }
 
+.element {
+  position: relative;
+  top: 8%;
+  transform: translateY(-8%);
+}
+
 .panel
 {
   background : #FFFFFF;
@@ -25,7 +31,6 @@ body {
   border-width : 0px;
   box-shadow : 0px 2.41px 2.41px rgba(86, 85, 86, 0.15);
   filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=0, OffY=2.41, Color='#565556') ;
-  margin-top: 1cm;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
@@ -85,14 +90,14 @@ li {
 }
 .dump:hover {
 	background-color:#EE9999;
-	border-bottom: #E47272;
+	border-bottom: solid #E47272;
 
 }
 .dump:focus {
 	position:relative;
-	background-color:#C52727;
+	background-color:#EE9999;
+	border-bottom: none;
 	top:1px;
-	border-bottom: #D22E2E;
 }
 
 @keyframes fadein {
