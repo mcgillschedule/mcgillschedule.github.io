@@ -46,7 +46,6 @@ window.onload = function() {
 
 //Authenticate
 var clientId = '613471085204-fvk3a7kfu7morl2gp97vspoj21r4b2fv.apps.googleusercontent.com';
-//var apiKey = 'AIzaSyCZ8zC0LT8MDTkpDL41tlC7CB7AhOvH1Zw';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 
 
